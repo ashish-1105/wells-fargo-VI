@@ -13,6 +13,9 @@ public class Security {
     @GeneratedValue()
     private long securityId;
 
+    @ManyToOne
+    private Portfolio portfolio;
+
     @Column(nullable = false)
     private String name;
 
@@ -20,19 +23,20 @@ public class Security {
     private String category;
 
     @Column(nullable = false)
-    private long purchasePrice;
+    private float purchasePrice;
 
     @Column(nullable = false)
     private String purchaseDate;
 
     @Column(nullable = false)
-    private long quantity;
+    private float quantity;
 
     protected Security() {
 
     }
 
-    public Security(String name, String category, long purchasePrice, String purchaseDate, long quantity) {
+    public Security(Portfolio portfolio, String name, String category, float purchasePrice, String purchaseDate, float quantity) {
+    	this.portfolio = portfolio;
         this.name = name;
         this.category = category;
         this.purchasePrice = purchasePrice;
@@ -42,6 +46,14 @@ public class Security {
 
     public Long getSecurityId() {
         return securityId;
+    }
+
+    public Portfolio getPortfolio() {
+	return portfolio;
+    }
+
+    public Portfolio setPortfolio(Portfolio portfolio) {
+    	this.portfolio = portfolio;
     }
 
     public String getName() {
@@ -64,7 +76,7 @@ public class Security {
         return purchasePrice;
     }
 
-    public void setPurchasePrice(String purchasePrice) {
+    public void setPurchasePrice(float purchasePrice) {
         this.purchasePrice = purchasePrice;
     }
 
@@ -80,7 +92,7 @@ public class Security {
         return quantity;
     }
 
-    public void setQuantity(String quantity) {
+    public void setQuantity(float quantity) {
         this.quantity = quantity;
     }
 }
